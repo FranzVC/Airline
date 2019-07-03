@@ -10,14 +10,30 @@ public class Airline {
     private List<FlightReservation> flightReservationList = new ArrayList<>();
     private List<TicketVendor> ticketVendorList = new ArrayList<>();
 
-    public void provideFlightDetails(Integer flight_number)
+    public Airline(String name){
+        reservation_availability = true;
+        this.name = name;
+    }
+    public Flight provideFlight(Integer flight_number)
     {
         for (Flight flight:flightArray)
         {
-            if(flight.flight_number==flight_number )
-                System.out.printf(flight.toString());
-                System.out.println();
+            if(flight.flight_number==flight_number ) {
+                return flight;
+            }
         }
+        return null;
+    }
+
+    public boolean isFlightAvailible(Integer flight)
+    {
+        for (Flight f:flightArray)
+        {
+            if(f.flight_number==flight && f.isAvailibility()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void provideFlightDetailsAvailibles()
@@ -31,27 +47,28 @@ public class Airline {
         }
     }
 
-    public boolean confirmBooking(FlightReservation flightReservation)
+    public Flight confirmBooking(FlightReservation flightReservation)
     {
         for (Flight flight:flightArray)
         {
             //si hay espacio en el vuelo
-            if(flight.flight_number==flightReservation.flight_number && flight.getMaxPassangers()>0){
+            if(flight.flight_number==flightReservation.flight_number && flight.getMaxPassangers()>flight.totalPassangers){
                 flightReservationList.add(flightReservation);
-                flight.setMaxPassangers(flight.getMaxPassangers()-1);
-                return true;
+                flight.totalPassangers++;
+                return flight;
             }
-            if (flight.getMaxPassangers()<=0)
+            if (flight.totalPassangers>=flight.getMaxPassangers())
             {
                 flight.setAvailibility(false);
-                return false;
+                return null;
             }
         }
-        return false;
+        return null;
     }
 
-    public void newFlight(Flight flight)
+    public void newFlight(String destination, String departure, String flight_date, String flight_time, Integer flight_price, Integer flight_number)
     {
+        Flight flight = new Flight( destination, departure, flight_date, flight_time, flight_price, flight_number);
         flightArray.add(flight);
     }
 

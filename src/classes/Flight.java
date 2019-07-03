@@ -10,10 +10,12 @@ public class Flight {
 
     private boolean availibility;
     private Integer maxPassangers;
+    public Integer totalPassangers;
 
     public Flight(String destination, String departure, String flight_date, String flight_time, Integer flight_price, Integer flight_number) {
         availibility = true;
         maxPassangers = 10;
+        totalPassangers = 0;
         this.destination = destination;
         this.departure = departure;
         this.flight_date = flight_date;
@@ -47,6 +49,9 @@ public class Flight {
                 ", flight_time='" + flight_time + '\'' +
                 ", flight_price=" + flight_price +
                 ", flight_number=" + flight_number +
+                ", availibility=" + availibility +
+                ", maxPassangers=" + maxPassangers +
+                ", totalPassangers=" + totalPassangers +
                 '}';
     }
 }
