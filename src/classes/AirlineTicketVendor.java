@@ -7,7 +7,7 @@ public class AirlineTicketVendor extends TicketVendor {
     private String airline_address;
 
     public AirlineTicketVendor(Airline airline, String airline_name, String airline_address) {
-        this.airline_name = airline.name;
+        this.airline_name = airline.getName();
         this.airline_address = airline_address;
     }
 

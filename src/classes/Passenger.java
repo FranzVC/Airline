@@ -41,10 +41,10 @@ public class Passenger {
     }
 
 
-    // You have a misspelling here please change (requestFlightsAvailibles) to (getFlightsAvailable)
-    public void requestFlightsAvailibles(Airline airline)
+
+    public void requestFlightsAvailables(Airline airline)
     {
-        airline.provideFlightDetailsAvailibles();
+        airline.provideFlightDetailsAvailables();
     }
 
     public void payForTicket(TicketVendor ticketVendor,Integer flight_number, String passanger_name,Airline airline)
@@ -62,14 +62,12 @@ public class Passenger {
         }
     }
 
-    // You have a misspelling here please change (passangersOfFlight) to (getTotalPassengerOfFlight), what do you think about?
-    public void passangersOfFlight(Airline airline,Flight flight){
-        System.out.println("total passangers: "+airline.provideFlight(flight.flight_number).totalPassangers+"  flight: "+ flight.flight_number);
+    public void getTotalPassengerOfFlight(Airline airline,Flight flight){
+        System.out.println("total passangers: "+airline.provideFlight(flight.getFlight_number()).getTotalPassengers()+"  flight: "+ flight.getFlight_number());
     }
 
-    // Misspelling here please change it to (isFlightAvailable)
-    public void isFlightAvailible(Integer flight_number, Airline airline){
-        if(airline.isFlightAvailible(flight_number))
+    public void isFlightAvailable(Integer flight_number, Airline airline){
+        if(airline.isFlightAvailable(flight_number))
         {
             System.out.println("Flight "+flight_number+" is availible");
         }
