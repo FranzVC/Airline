@@ -1,12 +1,14 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Passenger {
     private String name;
     private String address;
     private Integer social_security_number;
 
-    public Passenger() {
-    }
+    private List<Ticket> ticketsPurchased = new ArrayList<>();
 
     public Passenger(String name, String address, Integer social_security_number) {
         this.name = name;
@@ -38,14 +40,42 @@ public class Passenger {
         this.social_security_number = social_security_number;
     }
 
-    public void requestFlight()
+
+    // You have a misspelling here please change (requestFlightsAvailibles) to (getFlightsAvailable)
+    public void requestFlightsAvailibles(Airline airline)
     {
-        //implementation
+        airline.provideFlightDetailsAvailibles();
     }
 
-    public void payForTicket()
+    public void payForTicket(TicketVendor ticketVendor,Integer flight_number, String passanger_name,Airline airline)
     {
-        //implementation
+        Ticket ticket = ticketVendor.reserveFlight(flight_number, passanger_name, airline);
+        if (ticket != null)
+        {
+            System.out.println("HERE IS YOUR TICKET");
+            System.out.println(ticket.toString());
+            ticketsPurchased.add(ticket);
+        }
+        else
+        {
+            System.out.println("Flight no availible");
+        }
     }
 
+    // You have a misspelling here please change (passangersOfFlight) to (getTotalPassengerOfFlight), what do you think about?
+    public void passangersOfFlight(Airline airline,Flight flight){
+        System.out.println("total passangers: "+airline.provideFlight(flight.flight_number).totalPassangers+"  flight: "+ flight.flight_number);
+    }
+
+    // Misspelling here please change it to (isFlightAvailable)
+    public void isFlightAvailible(Integer flight_number, Airline airline){
+        if(airline.isFlightAvailible(flight_number))
+        {
+            System.out.println("Flight "+flight_number+" is availible");
+        }
+        else
+        {
+            System.out.println("Flight "+flight_number+" is not availible");
+        }
+    }
 }
