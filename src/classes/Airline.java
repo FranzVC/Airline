@@ -1,14 +1,44 @@
 package classes;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Airline {
-    public String name;
-    public boolean reservation_availability;
+    private String name;
+    private boolean reservation_availability;
     private List<Flight> flightArray = new ArrayList<>();
     private List<FlightReservation> flightReservationList = new ArrayList<>();
     private List<TicketVendor> ticketVendorList = new ArrayList<>();
+
+    public List<Flight> getFlightArray() {
+        return flightArray;
+    }
+
+    public List<FlightReservation> getFlightReservationList() {
+        return flightReservationList;
+    }
+
+    public List<TicketVendor> getTicketVendorList() {
+        return ticketVendorList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isReservation_availability() {
+        return reservation_availability;
+    }
+
+    public void setReservation_availability(boolean reservation_availability) {
+        this.reservation_availability = reservation_availability;
+    }
 
     public Airline(String name){
         reservation_availability = true;
@@ -18,31 +48,30 @@ public class Airline {
     {
         for (Flight flight:flightArray)
         {
-            if(flight.flight_number==flight_number ) {
+            if(flight.getFlight_number().equals(flight_number) ) {
                 return flight;
             }
         }
         return null;
     }
 
-    public boolean isFlightAvailible(Integer flight)
+    public boolean isFlightAvailable(Integer flight)
     {
         for (Flight f:flightArray)
         {
-            if(f.flight_number==flight && f.isAvailibility()) {
+            if(f.getFlight_number().equals(flight) && f.isAvailability()) {
                 return true;
             }
         }
         return false;
     }
 
-    public void provideFlightDetailsAvailibles()
+    public void provideFlightDetailsAvailables()
     {
         for (Flight flight:flightArray)
         {
-            if(flight.isAvailibility()) {
-                System.out.printf(flight.toString());
-                System.out.println();
+            if(flight.isAvailability()) {
+                System.out.println(flight.toString());
             }
         }
     }
@@ -51,15 +80,14 @@ public class Airline {
     {
         for (Flight flight:flightArray)
         {
-            //si hay espacio en el vuelo
-            if(flight.flight_number==flightReservation.flight_number && flight.getMaxPassangers()>flight.totalPassangers){
+            if(flight.getFlight_number().equals(flightReservation.getFlight_number())&& flight.getMaxPassengers()>flight.getTotalPassengers()){
                 flightReservationList.add(flightReservation);
-                flight.totalPassangers++;
+                flight.setTotalPassengers(flight.getTotalPassengers()+1);
                 return flight;
             }
-            if (flight.totalPassangers>=flight.getMaxPassangers())
+            if (flight.getTotalPassengers()>=flight.getMaxPassengers())
             {
-                flight.setAvailibility(false);
+                flight.setAvailability(false);
                 return null;
             }
         }
