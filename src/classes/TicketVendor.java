@@ -9,7 +9,7 @@ public class TicketVendor {
         this.airline = airline;
     }*/
 
-    public List<Ticket> ticketsSold = new ArrayList<>();
+    private List<Ticket> ticketsSold = new ArrayList<>();
 
     private Integer reservation_number;
 
@@ -17,13 +17,13 @@ public class TicketVendor {
     {
         reservation_number = 0;
     }
-                                                        // This variable name has misspelling need to change (passenger_name)
-    protected Ticket reserveFlight(Integer flight_number, String passanger_name,Airline airline)
+
+    protected Ticket reserveFlight(Integer flight_number, String passenger_name,Airline airline)
     {
-        FlightReservation flightReservation = new FlightReservation(passanger_name,flight_number,reservation_number++);
+        FlightReservation flightReservation = new FlightReservation(passenger_name,flight_number,reservation_number++);
         Flight flight = airline.confirmBooking(flightReservation);
         if(flight!=null) {
-            Ticket ticket = new Ticket(airline.name, flight.flight_price, flight.flight_date, flight.flight_time, flight.flight_number, reservation_number++);
+            Ticket ticket = new Ticket(airline.getName(), flight.getFlight_price(), flight.getFlight_date(), flight.getFlight_time(), flight.getFlight_number(), reservation_number++);
             ticketsSold.add(ticket);
             return ticket;
         }else
@@ -35,7 +35,7 @@ public class TicketVendor {
 
     protected void checkAvailability(Airline airline)
     {
-        airline.provideFlightDetailsAvailibles();
+        airline.provideFlightDetailsAvailables();
     }
 
     protected Flight checkAvailability(Airline airline,Integer flight_number)
